@@ -38,6 +38,7 @@ locals {
   afd_routing_rule_name     = "${local.afd_prefix}-route-appgw"
   afd_custom_domain_name    = "${local.afd_prefix}-custom-domain-adfs"
   afd_waf_policy_name       = "${local.afd_prefix}-waf-policy-adfs"
+  afd_waf_policy_name_sanitized = lower(join("", regexall("[a-zA-Z0-9]", local.afd_waf_policy_name)))
   adfs_security_policy_name = "${local.afd_prefix}-security-policy-adfs"
   ## custom domain for AFD
   custom_domain_name          = "dns-zone-custom-domain-adfs"
@@ -46,8 +47,9 @@ locals {
   umi_object_id = "CHANGE_ME" # Replace with actual UMI object ID from centralized automation
 
   # AppGw Vars
-  appgw_sku = "Standard_v2"
-  appgw_sku_tier = "Regional"
+  appgw_pip_sku = "Standard"
+  appgw_pip_sku_tier = "Regional"
+  appgw_sku = "WAF_v2"
   appgw_pip_name = "pip-${local.appgw_name}"
   dns_label                      = "${var.app_short_name}${local.env_suffix}" 
   appgw_name                     = "appgw-${var.app_short_name}-${var.location}"

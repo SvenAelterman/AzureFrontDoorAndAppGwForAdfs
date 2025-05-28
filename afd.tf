@@ -2,7 +2,7 @@ module "afd_waf_policy" {
   source  = "Azure/avm-res-network-frontdoorwebapplicationfirewallpolicy/azurerm"
   version = "0.1.0"
 
-  name                = local.afd_waf_policy_name
+  name                = local.afd_waf_policy_name_sanitized
   resource_group_name = local.web_svc_network_rg
   enable_telemetry    = false
   mode                = "Prevention"
@@ -71,7 +71,7 @@ resource "azurerm_cdn_frontdoor_security_policy" "adfs_security_policy" {
 
   security_policies {
     firewall {
-      cdn_frontdoor_firewall_policy_id = module.afd_waf_policy.id
+      cdn_frontdoor_firewall_policy_id = module.afd_waf_policy.resource_id
 
       association {
         domain {

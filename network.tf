@@ -8,7 +8,7 @@ module "subnets" {
   subscription_id = var.subscription_id_app_lz
 
   name = each.value.name
-  virtual_network_ = {
+  virtual_network = {
     resource_id = each.value.vnet_resource_id
   }
   address_prefixes = each.value.address_prefixes

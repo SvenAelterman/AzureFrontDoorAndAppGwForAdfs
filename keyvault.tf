@@ -3,8 +3,8 @@ module "keyvault" {
   version             = "0.10.0"
   name                = module.naming.key_vault.name_unique
   enable_telemetry    = false
-  location            = azurerm_resource_group.rg_web_svc.location
-  resource_group_name = azurerm_resource_group.rg_web_svc.name
+  location            = var.location
+  resource_group_name = local.web_svc_rg
   tenant_id           = data.azurerm_client_config.current.tenant_id
 
   purge_protection_enabled   = true

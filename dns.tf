@@ -11,7 +11,7 @@ resource "azurerm_dns_txt_record" "adfs" {
   ttl                 = 3600
 
   record {
-    value = azurerm_cdn_frontdoor_custom_domain.example.validation_token
+    value = azurerm_cdn_frontdoor_custom_domain.adfs.validation_token
   }
 }
 
@@ -23,7 +23,7 @@ resource "azurerm_dns_cname_record" "adfs" {
   record              = azurerm_cdn_frontdoor_endpoint.adfs_endpoint.host_name
 
   depends_on = [
-    zurerm_cdn_frontdoor_route.adfs_appgw, 
+    azurerm_cdn_frontdoor_route.adfs_appgw, 
     azurerm_cdn_frontdoor_security_policy.adfs_security_policy
 ]
 }

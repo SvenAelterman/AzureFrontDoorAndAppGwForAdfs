@@ -2,8 +2,8 @@ resource "azurerm_public_ip" "appgw_pip" {
   name                = local.appgw_pip_name
   resource_group_name = local.web_svc_network_rg
   location            = var.location
-  sku                 = local.appgw_sku
-  sku_tier            = local.appgw_sku_tier
+  sku                 = local.appgw_pip_sku
+  sku_tier            = local.appgw_pip_sku_tier
   allocation_method   = "Static"
 
   domain_name_label   = local.dns_label # must be globally unique within Azure
@@ -34,9 +34,9 @@ module "application_gateway" {
   # WAF : Azure Application Gateways v2 are always deployed in a highly available fashion with multiple instances by default. Enabling autoscale ensures the service is not reliant on manual intervention for scaling.
   sku = {
     # Accpected value for names Standard_v2 and WAF_v2
-    name = "WAF_v2"
+    name = local.appgw_sku
     # Accpected value for tier Standard_v2 and WAF_v2
-    tier = "WAF_v2"
+    tier = local.appgw_sku
     # Accpected value for capacity 1 to 10 for a V1 SKU, 1 to 100 for a V2 SKU
     capacity = 0 # Set the initial capacity to 0 for autoscaling
   }
