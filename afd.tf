@@ -46,10 +46,10 @@ resource "azurerm_cdn_frontdoor_origin" "adfs" {
 
   certificate_name_check_enabled = false
 
-  host_name          = local.afd_custom_domain_host_name
+  host_name          = azurerm_public_ip.appgw_pip.fqdn
   http_port          = 80
   https_port         = 443
-  origin_host_header = "www.${local.afd_custom_domain_host_name}"
+  origin_host_header = azurerm_public_ip.appgw_pip.fqdn
   priority           = 1
   weight             = 1
 }

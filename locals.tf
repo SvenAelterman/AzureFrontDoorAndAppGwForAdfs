@@ -5,6 +5,7 @@ locals {
   web_svc_vnet       = "vnet-${var.app_short_name}-web-services"
   hub_dns_zone_rg    = "rg-hub-dns-${var.location}"
   certificate_name   = "${local.web_service_name}-cert"
+  env_suffix         = var.environment == "prod" ? "" : "-${var.environment}"
   tags = {
     "Env" : var.environment
   }
@@ -28,7 +29,6 @@ locals {
 
   #AFD Vars
   afd_sku_name             = "Standard_AzureFrontDoor"
-  env_suffix                = var.environment == "prod" ? "" : "-${var.environment}"
   afd_prefix                = "afd-${var.app_short_name}${local.env_suffix}"
   afd_profile_name          = "${local.afd_prefix}-profile"
   afd_endpoint_name         = "${local.afd_prefix}-endpoint"
@@ -46,6 +46,7 @@ locals {
   umi_object_id = "CHANGE_ME" # Replace with actual UMI object ID from centralized automation
 
   # AppGw Vars
+  dns_label                      = "${local.web_service_name}${local.env_suffix}" 
   appgw_name                     = "appgw-${var.app_short_name}-${var.location}"
   backend_address_pool_name      = "${local.web_service_name}-be-ap"
   frontend_port_name             = "${local.web_service_name}-fe-port"

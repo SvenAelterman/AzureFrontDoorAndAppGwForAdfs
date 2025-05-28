@@ -1,18 +1,21 @@
 resource "azurerm_public_ip" "appgw_pip" {
-  provider            = azurerm.connectivity
   name                = "pip-${local.appgw_name}"
   resource_group_name = local.web_svc_network_rg
   location            = var.location
   sku                 = "Standard"
   sku_tier            = "Regional"
   allocation_method   = "Static"
+
+  domain_name_label   = local.dns_label # must be globally unique within Azure
 }
 
 module "application_gateway" {
   source  = "Azure/avm-res-network-applicationgateway/azurerm"
   version = "0.4.0"
 
-  depends_on = [module.keyvault]
+  depends_on = [
+    module.keyvault
+  ]
 
   # pre-requisites resources input required for the module
   create_public_ip      = false
