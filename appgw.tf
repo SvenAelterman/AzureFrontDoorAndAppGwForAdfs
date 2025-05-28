@@ -1,9 +1,9 @@
 resource "azurerm_public_ip" "appgw_pip" {
-  name                = "pip-${local.appgw_name}"
+  name                = local.appgw_pip_name
   resource_group_name = local.web_svc_network_rg
   location            = var.location
-  sku                 = "Standard"
-  sku_tier            = "Regional"
+  sku                 = local.appgw_sku
+  sku_tier            = local.appgw_sku_tier
   allocation_method   = "Static"
 
   domain_name_label   = local.dns_label # must be globally unique within Azure

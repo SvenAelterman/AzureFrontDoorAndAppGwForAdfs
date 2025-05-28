@@ -46,7 +46,10 @@ locals {
   umi_object_id = "CHANGE_ME" # Replace with actual UMI object ID from centralized automation
 
   # AppGw Vars
-  dns_label                      = "${local.web_service_name}${local.env_suffix}" 
+  appgw_sku = "Standard_v2"
+  appgw_sku_tier = "Regional"
+  appgw_pip_name = "pip-${local.appgw_name}"
+  dns_label                      = "${var.app_short_name}${local.env_suffix}" 
   appgw_name                     = "appgw-${var.app_short_name}-${var.location}"
   backend_address_pool_name      = "${local.web_service_name}-be-ap"
   frontend_port_name             = "${local.web_service_name}-fe-port"
