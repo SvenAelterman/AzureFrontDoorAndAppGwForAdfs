@@ -1,26 +1,26 @@
 resource "azurerm_public_ip" "appgw_pip" {
-    provider = azurerm.connectivity
-    name                = "pip-${local.appgw_name}"
-    resource_group_name = local.web_svc_network_rg
-    location            = var.location
-    sku = "Standard"
-    sku_tier = "Regional"
-    allocation_method   = "Static"
+  provider            = azurerm.connectivity
+  name                = "pip-${local.appgw_name}"
+  resource_group_name = local.web_svc_network_rg
+  location            = var.location
+  sku                 = "Standard"
+  sku_tier            = "Regional"
+  allocation_method   = "Static"
 }
 
 module "application_gateway" {
   source  = "Azure/avm-res-network-applicationgateway/azurerm"
   version = "0.4.0"
 
-  depends_on = [ module.keyvault ]
+  depends_on = [module.keyvault]
 
   # pre-requisites resources input required for the module
-  create_public_ip = false
-  public_ip_resource_id      = azurerm_public_ip.appgw_pip.id
+  create_public_ip      = false
+  public_ip_resource_id = azurerm_public_ip.appgw_pip.id
 
   resource_group_name = local.web_svc_network_rg
   location            = var.location
-  enable_telemetry = false
+  enable_telemetry    = false
   # provide Application gateway name
   name = local.appgw_name
 
@@ -99,9 +99,9 @@ module "application_gateway" {
   # The use of an external WAF policy is recommended rather than using the classic WAF via the waf_configuration block.
   # app_gateway_waf_policy_resource_id = azurerm_web_application_firewall_policy.azure_waf.id
   waf_configuration = {
-    enabled = true
-    firewall_mode = "Detection"
-    rule_set_type = "OWASP"
+    enabled          = true
+    firewall_mode    = "Detection"
+    rule_set_type    = "OWASP"
     rule_set_version = "3.2"
   }
 
@@ -178,8 +178,8 @@ module "application_gateway" {
       name                           = "${module.naming.application_gateway.name_unique}-diagnostic-setting"
       workspace_resource_id          = local.log_analytics_workspace_id
       log_analytics_destination_type = "Dedicated" # Or "AzureDiagnostics"
-      log_groups        = ["allLogs"]
-      metric_categories = ["AllMetrics"]
+      log_groups                     = ["allLogs"]
+      metric_categories              = ["AllMetrics"]
     }
   }
 
