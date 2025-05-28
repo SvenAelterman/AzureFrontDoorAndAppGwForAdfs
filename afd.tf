@@ -1,5 +1,5 @@
 module "afd_waf_policy" {
-  source  = "Azure/avm-res-network-frontdoorapplicationfirewallpolicy/azurerm"
+  source  = "Azure/avm-res-network-frontdoorwebapplicationfirewallpolicy/azurerm"
   version = "0.1.0"
 
   name                = local.afd_waf_policy_name
