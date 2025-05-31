@@ -4,6 +4,7 @@ variable "subscription_id" {
 }
 
 variable "regions" {
+  # TODO: This set gets converted to a list which isn't ordered the same way (possibly). We need order, so we need to use a map instead
   description = "List of regions to deploy the Application Gateway."
   type        = set(string)
   default     = ["canadacentral", "eastus"]
@@ -70,4 +71,10 @@ variable "waf_mode" {
     condition     = contains(["Prevention", "Detection"], var.waf_mode)
     error_message = "WAF mode must be either 'Prevention' or 'Detection'."
   }
+}
+
+variable "health_probe_path" {
+  description = "The path to use for the Application Gateway and Front Door health probes. Default is '/'."
+  type        = string
+  default     = "/"
 }

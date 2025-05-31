@@ -30,6 +30,6 @@ module "resource_group_afd" {
   enable_telemetry = var.enable_telemetry
 
   name     = replace(replace(local.naming_structure, "{resource_type}", "rg-afd"), "{region}", "global")
-  location = tolist(var.regions)[0] # Use the first region for the region of the AFD resource group
+  location = local.regions_list[0] # Use the first region for the region of the AFD resource group
   tags     = var.tags
 }

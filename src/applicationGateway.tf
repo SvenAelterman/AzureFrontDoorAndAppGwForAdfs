@@ -53,8 +53,7 @@ module "application_gateway_waf_policy" {
           ]
           operator           = "Equal"
           negation_condition = true
-          // TODO: Put in AFD GUID
-          match_values = ["some_id_pending"]
+          match_values       = [azurerm_cdn_frontdoor_profile.afd.resource_guid]
         }
       }
     }
@@ -244,7 +243,7 @@ module "application_gateway" {
       # http://-/adfs/probe is supposed to be used but the customer for whom this was developed does not have this endpoint available.
       # https://learn.microsoft.com/windows-server/identity/ad-fs/overview/ad-fs-requirements#load-balancer-requirements
       # This URL is publicly accessible and should return a 200 OK response.
-      path                                      = "/adfs/.well-known/openid-configuration"
+      path                                      = var.health_probe_path
       interval                                  = 30
       timeout                                   = 30
       unhealthy_threshold                       = 3
