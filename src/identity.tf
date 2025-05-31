@@ -13,6 +13,7 @@ module "identity" {
   tags                = var.tags
 }
 
+# Give the identity access to the Key Vaults in each region to read the TLS certificates (as secrets).
 module "role_assignment_identity_key_vault" {
   source           = "Azure/avm-res-authorization-roleassignment/azurerm"
   version          = "~> 0.2.0"
