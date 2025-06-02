@@ -65,7 +65,7 @@ variable "deny_public_ip_addresses_policy_assignment_id" {
 variable "waf_mode" {
   description = "The WAF mode to use for the Application Gateway and Front Door. Can be 'Prevention' or 'Detection'."
   type        = string
-  default     = "Detection"
+  default     = "Prevention"
 
   validation {
     condition     = contains(["Prevention", "Detection"], var.waf_mode)
