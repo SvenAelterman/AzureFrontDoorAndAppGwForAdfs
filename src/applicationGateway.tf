@@ -122,9 +122,8 @@ module "application_gateway" {
   backend_address_pools = {
     bep-adfs = {
       name = local.backend_pool_name
-      // TODO: Add VMs per region (new variable)
-      # ip_addresses = ["100.64.2.6", "100.64.2.5"]
-      #fqdns        = ["example1.com", "example2.com"]
+      // Add backend VMs per region
+      ip_addresses = var.backend_addresses[each.key].ip_addresses
     }
   }
 
