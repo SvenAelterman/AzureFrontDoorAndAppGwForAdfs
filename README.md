@@ -22,6 +22,15 @@ Using Terraform remote state is recommended. If no remote state location is avai
 
 - Support for geo-redundant deployments using two or more regions.
 
+## Production readiness considerations
+
+Please review guidance for resiliency, security, etc. for all Azure resources deployed. You can use many Microsoft-provided resources, such as APRL and security baselines.
+
+This list might not be exhaustive:
+
+- Monitoring/alerting: Monitoring and alerting is assumed to be enabled by Policy, perhaps using AMBA.
+- Sensitive data log scrubbing
+
 ## References
 
 [Bicep implementation](https://learn.microsoft.com/samples/azure/azure-quickstart-templates/front-door-standard-premium-application-gateway-public/)
