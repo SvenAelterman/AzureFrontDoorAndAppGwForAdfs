@@ -29,3 +29,15 @@ variable "backend_addresses" {
     ip_addresses = set(string)
   }))
 }
+
+variable "enable_current_origin" {
+  description = "Enable the current origin IP address for the Azure Front Door. If false, the current origin will not be used."
+  type        = bool
+  default     = true
+}
+
+variable "enable_app_gateway_origin" {
+  description = "Enable the Application Gateway as an origin for the Azure Front Door. If false, the Application Gateway will not be used as an origin."
+  type        = bool
+  default     = false
+} 

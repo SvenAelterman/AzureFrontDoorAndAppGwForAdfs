@@ -44,7 +44,6 @@ resource "azurerm_cdn_frontdoor_endpoint" "fde" {
 }
 
 resource "azurerm_cdn_frontdoor_origin_group" "origin_group" {
-  // TODO: Use priority weight
   name                     = "origin-${var.workload_name}"
   cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.afd.id
 
@@ -66,7 +65,7 @@ resource "azurerm_cdn_frontdoor_origin" "origin_current" {
 
   name                          = "origin-${var.workload_name}-current"
   cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.origin_group.id
-  enabled                       = true
+  enabled                       = var.enable_current_origin
 
   certificate_name_check_enabled = true
 
@@ -79,7 +78,7 @@ resource "azurerm_cdn_frontdoor_origin" "origin_current" {
 resource "azurerm_cdn_frontdoor_origin" "origin_appgw" {
   name                          = "origin-${var.workload_name}-appgw"
   cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.origin_group.id
-  enabled                       = false # TODO: make configurable
+  enabled                       = var.enable_app_gateway_origin
 
   for_each = var.regions
 
@@ -87,7 +86,7 @@ resource "azurerm_cdn_frontdoor_origin" "origin_appgw" {
 
   host_name          = module.application_gateway[each.key].new_public_ip_address
   origin_host_header = var.custom_domain_name
-  priority           = 5 # Assume migration so do not use this origin # TODO: make configurable
+  priority           = 1
   weight             = 1
 }
 

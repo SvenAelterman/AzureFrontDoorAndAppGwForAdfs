@@ -57,3 +57,11 @@ backend_addresses = {
     ip_addresses = ["10.1.0.1"]
   }
 }
+
+# Illustration of default values
+# The App Gateway origin will not be used from Front Door by default
+# This allows you to update your DNS to records to point to Front Door and keep using your current servers
+enable_app_gateway_origin = false
+enable_current_origin     = true
+
+waf_mode = "Prevention" 
