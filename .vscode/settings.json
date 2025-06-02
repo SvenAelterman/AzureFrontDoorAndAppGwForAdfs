@@ -13,5 +13,10 @@
     "resourcegroup",
     "roleassignment",
     "userassignedidentity"
-  ]
+  ],
+  "markdownlint.config": {
+    "default": true,
+    "no-inline-html": false,
+    "line-length": false
+  }
 }

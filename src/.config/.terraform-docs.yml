@@ -1,0 +1,24 @@
+formatter: "markdown"
+
+recursive:
+  enabled: false
+
+output:
+  file: "README.md"
+
+settings:
+  html: false
+  hide-empty: true
+
+content: |-
+  # Azure Networking for Active Directory Federation Services (AD FS)
+
+  {{ .Requirements }}
+
+  {{ .Providers }}
+
+  {{ .Inputs }}
+
+  {{ .Modules }}
+
+  {{ .Resources }}
