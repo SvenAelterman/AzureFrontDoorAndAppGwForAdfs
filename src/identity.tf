@@ -1,4 +1,4 @@
-// TODO: Create UAMI to be assigned to App GW to pull the cert from Key Vault. Assign the correct KV secret RBAC role to the UAMI.
+// Create UAMI to be assigned to App GW and Front Door to pull the cert from Key Vault. Assign the correct KV secret RBAC role to the UAMI.
 
 module "identity" {
   source           = "Azure/avm-res-managedidentity-userassignedidentity/azurerm"
