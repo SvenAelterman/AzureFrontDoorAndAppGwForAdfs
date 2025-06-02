@@ -35,3 +35,11 @@ override.tf.json
 # Ignore CLI configuration files
 .terraformrc
 terraform.rc
+
+backend.tf
+
+# Explicitly include specific tfvars files
+# For Trivy
+!trivy.tfvars
+# For sample configuration
+!sample.tfvars

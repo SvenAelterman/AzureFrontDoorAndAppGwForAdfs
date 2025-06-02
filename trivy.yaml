@@ -1,0 +1,8 @@
+misconfiguration:
+  terraform:
+    vars:
+      - src/trivy.tfvars
+
+scan:
+  scanners:
+    - misconfig

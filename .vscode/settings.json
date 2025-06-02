@@ -1,0 +1,22 @@
+{
+  "cSpell.words": [
+    "appgw",
+    "applicationgateway",
+    "applicationgatewaywebapplicationfirewallpolicy",
+    "azapi",
+    "FDID",
+    "frontdoor",
+    "frontdoorwebapplicationfirewallpolicy",
+    "kvsu",
+    "managedidentity",
+    "misconfig",
+    "resourcegroup",
+    "roleassignment",
+    "userassignedidentity"
+  ],
+  "markdownlint.config": {
+    "default": true,
+    "no-inline-html": false,
+    "line-length": false
+  }
+}
