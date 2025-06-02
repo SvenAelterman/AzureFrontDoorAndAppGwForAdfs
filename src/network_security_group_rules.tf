@@ -1,4 +1,4 @@
-// TODO: Block traffic to App Gateway subnet from anything but FD backend service tag
+// Block traffic to App Gateway subnet from anything but FD backend service tag
 
 # Allow HTTPS inbound from the Front Door backends
 # Note that this rule must be used in conjunction with the App GW WAF custom rule that inspects the X-Azure-FDID header
