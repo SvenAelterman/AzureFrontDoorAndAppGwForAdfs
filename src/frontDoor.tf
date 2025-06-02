@@ -122,23 +122,23 @@ resource "azurerm_cdn_frontdoor_custom_domain" "domain" {
   }
 }
 
-# resource "azurerm_cdn_frontdoor_security_policy" "afd_security_policy" {
-#   name                     = "secpol-${var.workload_name}"
-#   cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.afd.id
+resource "azurerm_cdn_frontdoor_security_policy" "afd_security_policy" {
+  name                     = "sec-${var.workload_name}"
+  cdn_frontdoor_profile_id = azurerm_cdn_frontdoor_profile.afd.id
 
-#   security_policies {
-#     firewall {
-#       cdn_frontdoor_firewall_policy_id = module.afd_waf_policy.resource_id
+  security_policies {
+    firewall {
+      cdn_frontdoor_firewall_policy_id = module.afd_waf_policy.resource_id
 
-#       association {
-#         domain {
-#           cdn_frontdoor_domain_id = azurerm_cdn_frontdoor_custom_domain.afd.id
-#         }
-#         patterns_to_match = ["/*"]
-#       }
-#     }
-#   }
-# }
+      association {
+        domain {
+          cdn_frontdoor_domain_id = azurerm_cdn_frontdoor_custom_domain.domain.id
+        }
+        patterns_to_match = ["/*"]
+      }
+    }
+  }
+}
 
 resource "azurerm_cdn_frontdoor_rule_set" "rule_set" {
   name                     = join("", regexall("[a-z0-9]", lower(var.workload_name)))
