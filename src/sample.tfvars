@@ -1,6 +1,11 @@
 custom_domain_name = "adfs.mycompany.com"
-subscription_id    = "00000000-0000-0000-0000-000000000000" # Identity (03)
+subscription_id    = "00000000-0000-0000-0000-000000000000"
 current_origin_ip  = "1.2.3.4"
+
+regions = [
+  "canadacentral",
+  "eastus"
+]
 
 app_gateway_subnet_ids = {
   canadacentral = {
@@ -10,15 +15,6 @@ app_gateway_subnet_ids = {
     subnet_id = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/<network-rg-name>/providers/Microsoft.Network/virtualNetworks/<vnet-name>/subnets/<subnet-name>"
   }
 }
-
-enable_telemetry = true # For Azure Verified Modules
-
-tags = {
-  date-created = "2025-06-01"
-  workload     = "ADFS"
-  owner        = "identity-team"
-}
-
 
 key_vaults = {
   canadacentral = {
@@ -31,11 +27,6 @@ key_vaults = {
   }
 }
 
-regions = [
-  "canadacentral",
-  "eastus"
-]
-
 network_security_group_ids = {
   canadacentral = {
     network_security_group_id = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/<network-rg-name>/providers/Microsoft.Network/networkSecurityGroups/<network-security-group-name>"
@@ -44,10 +35,6 @@ network_security_group_ids = {
     network_security_group_id = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/<network-rg-name>/providers/Microsoft.Network/networkSecurityGroups/<network-security-group-name>"
   }
 }
-
-deny_public_ip_addresses_policy_assignment_id = "/providers/microsoft.management/managementgroups/<identity-management-group-name>/providers/microsoft.authorization/policyassignments/deny-public-ip"
-
-health_probe_path = "/adfs/.well-known/openid-configuration"
 
 backend_addresses = {
   "canadacentral" = {
@@ -58,10 +45,22 @@ backend_addresses = {
   }
 }
 
+tags = {
+  date-created = "2025-06-01"
+  workload     = "ADFS"
+  owner        = "identity-team"
+}
+
+deny_public_ip_addresses_policy_assignment_id = "/providers/microsoft.management/managementgroups/<identity-management-group-name>/providers/microsoft.authorization/policyassignments/deny-public-ip"
+
+health_probe_path = "/adfs/.well-known/openid-configuration"
+
 # Illustration of default values
 # The App Gateway origin will not be used from Front Door by default
 # This allows you to update your DNS to records to point to Front Door and keep using your current servers
 enable_app_gateway_origin = false
 enable_current_origin     = true
 
-waf_mode = "Prevention" 
+waf_mode = "Prevention"
+
+enable_telemetry = true # For Azure Verified Modules
