@@ -24,13 +24,21 @@ Using Terraform remote state is recommended. If no remote state location is avai
 
 ## Production readiness considerations
 
-Please review guidance for resiliency, security, etc. for all Azure resources deployed. You can use many Microsoft-provided resources, such as APRL and security baselines.
+Please review guidance for resiliency, security, etc. for all Azure resources deployed. You can use many Microsoft-provided resources, such as [APRL](https://aka.ms/APRL) and security baselines.
 
 This list might not be exhaustive:
 
 - Monitoring/alerting: Monitoring and alerting is assumed to be enabled by Policy, perhaps using AMBA.
-- Sensitive data log scrubbing
+- Sensitive data log scrubbing.
+- Consider using private link origin for Application Gateways.
+- Add bot protection to the Azure Front Door Web Application Firewall.
 
 ## References
 
 [Bicep implementation](https://learn.microsoft.com/samples/azure/azure-quickstart-templates/front-door-standard-premium-application-gateway-public/)
+
+[Azure Front Door security baseline](https://learn.microsoft.com/security/benchmark/azure/baselines/azure-front-door-security-baseline)
+
+[Azure Front Door Well-Architected service guide](https://learn.microsoft.com/azure/well-architected/service-guides/azure-front-door)
+
+[Application Gateway service guide](https://learn.microsoft.com/azure/well-architected/service-guides/azure-application-gateway)
