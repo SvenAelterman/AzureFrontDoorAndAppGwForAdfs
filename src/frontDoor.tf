@@ -61,15 +61,16 @@ resource "azurerm_cdn_frontdoor_origin_group" "origin_group" {
 }
 
 resource "azurerm_cdn_frontdoor_origin" "origin_current" {
-  count = var.current_origin_ip != "" ? 1 : 0
+  #count = var.current_origin_ip != "" ? 1 : 0
+  for_each = var.current_origin_ips
 
-  name                          = "origin-${var.workload_name}-current"
+  name                          = "origin-${var.workload_name}-current-${each.key}"
   cdn_frontdoor_origin_group_id = azurerm_cdn_frontdoor_origin_group.origin_group.id
   enabled                       = var.enable_current_origin
 
   certificate_name_check_enabled = true
 
-  host_name          = var.current_origin_ip
+  host_name          = each.value
   origin_host_header = var.custom_domain_name
   priority           = 1
   weight             = 1
@@ -146,7 +147,7 @@ resource "azurerm_cdn_frontdoor_rule_set" "rule_set" {
 
 locals {
   appgw_origin_ids    = [for region in var.regions : azurerm_cdn_frontdoor_origin.origin_appgw[region].id]
-  optional_origin_ids = var.current_origin_ip != "" ? [azurerm_cdn_frontdoor_origin.origin_current[0].id] : []
+  optional_origin_ids = [for current in var.var.current_origin_ips : azurerm_cdn_frontdoor_origin.origin_current[current].id]
   all_origin_ids      = concat(local.appgw_origin_ids, local.optional_origin_ids)
 }
 

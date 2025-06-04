@@ -1,6 +1,6 @@
-variable "current_origin_ip" {
+variable "current_origin_ips" {
   description = "The current IP address of the origin server (on-premises, probably)."
-  type        = string
+  type        = map(string)
   default     = ""
 }
 
@@ -40,4 +40,4 @@ variable "enable_app_gateway_origin" {
   description = "Enable the Application Gateway as an origin for the Azure Front Door. If false, the Application Gateway will not be used as an origin."
   type        = bool
   default     = false
-} 
+}
